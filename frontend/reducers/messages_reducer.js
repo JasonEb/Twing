@@ -1,6 +1,12 @@
 import { RECEIVE_MESSAGE } from '../actions/message_actions'
 
-const messagesReducer = (state = {}, action) => {
+const initialState = {
+    1: 'testing testing',
+    2: 'test 2',
+    3: 'mic sounds nice'
+}
+
+const messagesReducer = (state = initialState, action) => {
     Object.freeze(state)
     let nextState = {}
 
