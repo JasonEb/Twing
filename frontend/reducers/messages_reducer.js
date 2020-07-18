@@ -1,6 +1,6 @@
 import { RECEIVE_MESSAGE } from '../actions/message_actions'
 
-const messageReducer = (state = {}, action) => {
+const messagesReducer = (state = {}, action) => {
     Object.freeze(state)
     let nextState = {}
 
