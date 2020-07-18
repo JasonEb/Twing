@@ -233,14 +233,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/store */ "./frontend/store/store.js");
 /* harmony import */ var _compenents_root__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./compenents/root */ "./frontend/compenents/root.jsx");
+/* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./actions/message_actions */ "./frontend/actions/message_actions.js");
+
+ //Util
 
 
+ //test
 
 
 document.addEventListener('DOMContentLoaded', function () {
   var store = Object(_store_store__WEBPACK_IMPORTED_MODULE_2__["default"])();
   var root = document.getElementById('root');
   window.store = store;
+  window.messageActions = _actions_message_actions__WEBPACK_IMPORTED_MODULE_4__;
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_compenents_root__WEBPACK_IMPORTED_MODULE_3__["default"], {
     store: store
   }), root);
