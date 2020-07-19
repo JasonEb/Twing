@@ -1,7 +1,7 @@
 import React from 'react';
 
 const MessageList = ({messages}) => {
-    let items = messages.map( (message) => <li>{message}</li>)
+    let items = messages.map( (message, idx) => <li key={idx}>{message}</li>)
     return <ul>
         <h1>Messages</h1>
         {items}
