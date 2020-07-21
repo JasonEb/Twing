@@ -1,13 +1,12 @@
-const websocket;
 import { WS_CONNECT, WS_SEND, WS_DISCONNECT } from '../actions/websocket_actions'
 
-const middleware = store => next => action => {
+const websocketMiddleware = store => next => action => {
   switch (action.type) {
     // User request to connect
     case WS_CONNECT:
       // Configure the object
       debugger
-      websocket = new WebSocket(action.payload.url);
+      websocket = new WebSocket(action.host);
 
       // Attach the callbacks
       websocket.onopen = () => dispatch({ type: 'WEBSOCKET:OPEN' });
@@ -32,3 +31,5 @@ const middleware = store => next => action => {
 
   return next(action);
 };
+
+export default websocketMiddleware

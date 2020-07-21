@@ -1,9 +1,9 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 // Actions
-import { receiveMessages } from '../../actions/message_actions'
+import { receiveMessage } from '../../actions/message_actions'
 import { wsConnect } from '../../actions/websocket_actions'
 
 // Selectors
@@ -14,7 +14,14 @@ import { allMessages } from '../../selectors/messageSelectors'
 const MessageList = (props) => {
     let messages = useSelector( state => allMessages(state) )
     let items = messages.map( (message, idx) => <li key={idx}>{message}</li>)
-    
+    const dispatch = useDispatch()
+
+    useEffect( () => {
+        dispatch(wsConnect('testing ws connect dispatch'))
+    }, [])
+
+
+
     return <ul>
         <h1>Messages</h1>
         {items}
