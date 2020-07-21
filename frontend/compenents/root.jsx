@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { Provider } from 'react-redux';
 
-import MessageListContainer from '../compenents/messages/message_list_container'
+import MessageList from '../compenents/messages/message_list'
 
 const Root = ({ store }) => {
     const [channel, setChannel] = useState("Testing Channel")
@@ -14,7 +14,7 @@ const Root = ({ store }) => {
     return (
     <Provider store={store}>
         <h1>{channel}</h1>
-        <MessageListContainer />
+        <MessageList />
     </Provider>
     )
 }
