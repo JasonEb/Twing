@@ -9,7 +9,7 @@ const Root = ({ store }) => {
 
     useEffect(() => {
         setChannel("Updated Channel")
-    });
+    }, []);
 
     return (
     <Provider store={store}>

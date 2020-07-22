@@ -11,13 +11,13 @@ import { allMessages } from '../../selectors/messageSelectors'
 
 
 
-const MessageList = (props) => {
+const MessageList = () => {
     let messages = useSelector( state => allMessages(state) )
     let items = messages.map( (message, idx) => <li key={idx}>{message}</li>)
     const dispatch = useDispatch()
 
     useEffect( () => {
-        dispatch(wsConnect('testing ws connect dispatch'))
+        dispatch(wsConnect('test'))
     }, [])
 
 
