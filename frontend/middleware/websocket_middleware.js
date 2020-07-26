@@ -33,7 +33,9 @@ const websocketMiddleware = store => next => action => {
   }
   
   const onMessage = (store) => (event) => {
-    store.dispatch(receiveMessage(event))
+    let dispatch = store.dispatch
+    let parsed = parseMessage(event.data)
+    dispatch(receiveMessage(parsed))
   }
   
   switch (action.type) {

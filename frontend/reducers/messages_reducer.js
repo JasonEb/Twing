@@ -10,10 +10,7 @@ const messagesReducer = (state = messagesInitialState, action) => {
 
     switch(action.type){
         case RECEIVE_MESSAGE:
-            let parsed = parseMessage(action.message.data)
-            const newMessage = { [Date.now()]: { message: parsed.message, meta: parsed} }
-
-            //
+            const newMessage = { [Date.now()]: { message: action.payload.message, meta: action.payload} }
             return Object.assign({}, state, newMessage)
         default:
             return state
