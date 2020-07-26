@@ -13,7 +13,11 @@ import { allMessages } from '../../selectors/messageSelectors'
 
 const MessageList = () => {
     let messages = useSelector( state => allMessages(state) )
-    let items = messages.map( (message, idx) => <li key={idx}>{message}</li>)
+
+    let items = messages.map( (message, idx) => {
+        return <li key={idx}>{message}</li>
+    })
+    
     const dispatch = useDispatch()
 
     useEffect( () => {

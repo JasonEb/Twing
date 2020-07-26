@@ -1,1 +1,5 @@
-export const allMessages = ({ messages }) => Object.values(messages) 
+export const allMessages = ({ messages }) => {
+    return Object.keys(messages).map( (id) => { 
+        return messages[id].message
+    }  )
+} 

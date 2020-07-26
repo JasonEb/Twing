@@ -1,35 +1,7 @@
 import { WS_CONNECT, WS_SEND, WS_DISCONNECT } from '../actions/websocket_actions'
 import { receiveMessage } from '../actions/message_actions'
 
-export const parseMessage = (rawMessage) => {
-  let parsedMessage = {
-      message: null,
-      tags: null,
-      command: null,
-      original: rawMessage,
-      channel: null,
-      username: null
-  };
-
-  if (rawMessage[0] === '@') {
-      let tagIndex = rawMessage.indexOf(' '),
-          userIndex = rawMessage.indexOf(' ', tagIndex + 1),
-          commandIndex = rawMessage.indexOf(' ', userIndex + 1),
-          channelIndex = rawMessage.indexOf(' ', commandIndex + 1),
-          messageIndex = rawMessage.indexOf(':', channelIndex + 1);
-
-      parsedMessage.tags = rawMessage.slice(0, tagIndex);
-      parsedMessage.username = rawMessage.slice(tagIndex + 2, rawMessage.indexOf('!'));
-      parsedMessage.command = rawMessage.slice(userIndex + 1, commandIndex);
-      parsedMessage.channel = rawMessage.slice(commandIndex + 1, channelIndex);
-      parsedMessage.message = rawMessage.slice(messageIndex + 1);
-  } else if (rawMessage.startsWith("PING")) {
-      parsedMessage.command = "PING";
-      parsedMessage.message = rawMessage.split(":")[1];
-  }
-  return parsedMessage;
-}
-
+import { parseMessage } from '../util/twitchHelperMethods'
 
 
 const websocketMiddleware = store => next => action => {
@@ -61,8 +33,7 @@ const websocketMiddleware = store => next => action => {
   }
   
   const onMessage = (store) => (event) => {
-    let message = parseMessage(event.data).message
-    store.dispatch(receiveMessage(message))
+    store.dispatch(receiveMessage(event))
   }
   
   switch (action.type) {
