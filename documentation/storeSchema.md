@@ -4,7 +4,7 @@
         timestamp: { message, meta }
     },
     points: {
-        id: { x: int, y: int, status: active, timestamp }
+        id: { x, y, active }
     }
 }
 ```
