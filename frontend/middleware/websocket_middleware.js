@@ -36,6 +36,16 @@ const websocketMiddleware = store => next => action => {
     let dispatch = store.dispatch
     let parsed = parseMessage(event.data)
     dispatch(receiveMessage(parsed))
+
+    //point command
+    let isPointCommand = parsed.message.startsWith("?point")
+    if (isPointCommand){
+      let pointParams = parsed.message.split(" ")
+      let x = parseInt(pointParams[1])
+      let y = parseInt(pointParams[2])
+      parsed.message = `Point received: ${x}, ${y}`
+      dispatch(receiveMessage(parsed))
+    }
   }
   
   switch (action.type) {
