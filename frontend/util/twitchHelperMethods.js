@@ -1,7 +1,7 @@
 export const parseMessage = (rawMessage) => {
     let parsedMessage = {
         message: '',
-        tags: '',
+        tags: {},
         command: '',
         original: rawMessage,
         channel: '',
@@ -24,20 +24,19 @@ export const parseMessage = (rawMessage) => {
         parsedMessage.command = "PING";
         parsedMessage.message = rawMessage.split(":")[1];
     }
-
+    
     return parsedMessage;
-  }
+}
 
-  const followAgeListener = chatClient.onPrivmsg(async (channel: string, user: string, message: string, msg: TwitchPrivateMessage) => {
-	if (message === '!followage') {
-		const follow = await apiClient.kraken.users.getFollowedChannel(msg.userInfo.userId, msg.channelId);
-
-		if (follow) {
-			const currentTimestamp = Date.now();
-			const followStartTimestamp = follow.followDate.getTime();
-			chatClient.say(channel, `@${user} You have been following for ${secondsToDuration((currentTimestamp - followStartTimestamp) / 1000)}!`);
-		} else {
-			chatClient.say(channel, `@${user} You are not following!`);
-		}
-	}
-});
+export const parseTags = (str) => {
+    let tags = {
+            badgeInfo: '',
+            badges: [],
+            color: '',
+            dispayName: '',
+            emoteSets: [0],
+            userId: '',
+            message: 'Message 1',
+            original: ''}
+    
+}

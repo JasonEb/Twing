@@ -12,7 +12,7 @@ const websocketMiddleware = store => next => action => {
     console.log('websocket open')
     
     let username = 'bidoubot'
-    let password = 'oauth:oasncugad4uhokjxuzr00u1o1q2daf'
+    let password = 'oauth:yfp9b5pv9dk966ldjyfk4ypk1t6p6p'
     let channel = "#interpretivedashdance"
   
     if (socket !== null && socket.readyState === 1) {
