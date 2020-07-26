@@ -1,9 +1,7 @@
-import { RECEIVE_MESSAGE } from '../actions/message_actions'
-
-import { parseMessage } from '../util/twitchHelperMethods'
+import { RECEIVE_POINT } from '../actions/points_actions'
 
 const initialState = { 
-    0: { x: 0, y: 0, active: true }
+    0: { x: 0, y: 10, active: true }
 }
 
 const pointsReducer = (state = initialState, action) => {
