@@ -1,6 +1,6 @@
 import { WS_CONNECT, WS_SEND, WS_DISCONNECT } from '../actions/websocket_actions'
 import { receiveMessage } from '../actions/message_actions'
-
+import { receivePoint } from '../actions/point_actions'
 import { parseMessage } from '../util/twitchHelperMethods'
 
 
@@ -44,7 +44,7 @@ const websocketMiddleware = store => next => action => {
       let x = parseInt(pointParams[1])
       let y = parseInt(pointParams[2])
       parsed.message = `Point received: ${x}, ${y}`
-      dispatch(receiveMessage(parsed))
+      dispatch(receivePoint({x, y}))
     }
   }
   

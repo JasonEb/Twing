@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 
 const Canvas = () => {
-    let points = useSelector( state => state.points )
+    let points = useSelector( state => Object.values(state.points) )
 
     const dispatch = useDispatch()
 
@@ -11,11 +11,12 @@ const Canvas = () => {
         console.log("Canvas initiated, points: ", points[0])
     }, [])
 
-    let { x, y} = points[0]
+    let { x, y } = points[ points.length - 1]
  
     return <div>
-        <p>Point: {x}, {y}</p>
-
+        <div className="plane">
+            <p>Point: {x}, {y}</p>
+        </div>
     </div>
 }
 
