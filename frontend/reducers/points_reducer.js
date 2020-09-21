@@ -1,9 +1,9 @@
 import { RECEIVE_POINT } from '../actions/point_actions'
 
 const initialState = { 
-    0: { x: 0, y: 10, active: true },
-    1: { x: -10, y: 5, active: true },
-    2: { x: -10, y: 10, active: true }
+    0: { x: 25, y: 25, active: true },
+    1: { x: 0, y: 0, active: true },
+    2: { x: 10, y: 10, active: true }
 }
 
 const pointsReducer = (state = initialState, action) => {

@@ -1,23 +1,67 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 
+const getPixelRatio = (context) => {
+  let backingStore =
+    context.backingStorePixelRatio ||
+    context.webkitBackingStorePixelRatio ||
+    context.mozBackingStorePixelRatio ||
+    context.msBackingStorePixelRatio ||
+    context.oBackingStorePixelRatio ||
+    context.backingStorePixelRatio ||
+    1;
+
+  return (window.devicePixelRatio || 1) / backingStore;
+};
+     
+
 const Canvas = () => {
-    let points = useSelector( state => Object.values(state.points) )
+  let ref = useRef();
+  let points = useSelector((state) => Object.values(state.points));
 
-    const dispatch = useDispatch()
+  useEffect(() => {
+    let { x, y } = points[points.length - 1];
+    let canvas = ref.current;
+    let context = canvas.getContext("2d");
+    let ratio = getPixelRatio(context);
+    let width = getComputedStyle(canvas).getPropertyValue("width").slice(0, -2);
+    let height = getComputedStyle(canvas)
+      .getPropertyValue("height")
+      .slice(0, -2);
 
-    useEffect( () => {
-        console.log("Canvas initiated, points: ", points[0])
-    }, [])
+    canvas.width = width * ratio;
+    canvas.height = height * ratio;
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
 
-    let { x, y } = points[ points.length - 1]
- 
-    return <div>
-        <div className="plane">
-            <p>Point: {x}, {y}</p>
-        </div>
+    context.beginPath();
+    
+    //background
+    context.strokeRect(0, 0, canvas.width, canvas.height);
+
+    //point
+    context.arc( x, y,
+      5,
+      0,
+      2 * Math.PI
+    );
+
+    context.fill();
+  }, [points]);
+
+  let { x, y } = points[points.length - 1];
+  return (
+    <div>
+      <div className="plane">
+        <p>
+          Point: {x}, {y}
+        </p>
+        <canvas ref={ref} style={{ width: "100px", height: "100px" }} />
+      </div>
     </div>
-}
+  );
+};
 
 export default Canvas;
+

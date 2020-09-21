@@ -38,7 +38,7 @@ const websocketMiddleware = store => next => action => {
     dispatch(receiveMessage(parsed))
 
     //point command
-    let isPointCommand = parsed.message.startsWith("?point")
+    let isPointCommand = parsed.message.startsWith("..point")
     if (isPointCommand){
       let pointParams = parsed.message.split(" ")
       let x = parseInt(pointParams[1])
