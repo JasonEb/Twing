@@ -3,6 +3,18 @@ import { receiveMessage } from '../actions/message_actions'
 import { receivePoint } from '../actions/point_actions'
 import { parseMessage } from '../util/twitchHelperMethods'
 
+const commandDispatcher () => {
+  //point command
+  let isPointCommand = parsed.message.startsWith("look")
+  if (isPointCommand){
+    let pointParams = parsed.message.split(" ")
+    let x = parseInt(pointParams[1])
+    let y = parseInt(pointParams[2])
+    parsed.message = `Point received: ${x}, ${y}`
+    dispatch(receivePoint({x, y}))
+  }
+}
+
 
 const websocketMiddleware = store => next => action => {
   let socket = null
@@ -37,15 +49,7 @@ const websocketMiddleware = store => next => action => {
     let parsed = parseMessage(event.data)
     dispatch(receiveMessage(parsed))
 
-    //point command
-    let isPointCommand = parsed.message.startsWith("..point")
-    if (isPointCommand){
-      let pointParams = parsed.message.split(" ")
-      let x = parseInt(pointParams[1])
-      let y = parseInt(pointParams[2])
-      parsed.message = `Point received: ${x}, ${y}`
-      dispatch(receivePoint({x, y}))
-    }
+    commandDispatcher(parsed)
   }
   
   switch (action.type) {
