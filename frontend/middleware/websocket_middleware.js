@@ -3,7 +3,7 @@ import { receiveMessage } from '../actions/message_actions'
 import { receivePoint } from '../actions/point_actions'
 import { parseMessage } from '../util/twitchHelperMethods'
 
-const commandDispatcher () => {
+const commandDispatcher = (parsed) => {
   //point command
   let isPointCommand = parsed.message.startsWith("look")
   if (isPointCommand){
