@@ -5,16 +5,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getPixelRatio } from '../util/canvasUtil'
 import Point from './point'
 
-const blipping = keyframes`
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-`
-
 const StyledCanvas = styled.canvas`
   background-color: ivory;
 `

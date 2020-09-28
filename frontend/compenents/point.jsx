@@ -4,12 +4,23 @@ import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { getPixelRatio } from '../util/canvasUtil'
 
+const blipping = keyframes`
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+`
 const StyledCanvas = styled.canvas`
     width: 100px;
     height: 100px;
     position: absolute;
     top: 0;
     left: 0;
+    animation: ${blipping} 1.2s 10;
+    opacity: 0;
 `
 
 const Point = ({point}) => {
