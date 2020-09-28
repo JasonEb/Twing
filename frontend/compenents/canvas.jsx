@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import styled, { keyframes } from "styled-components";
 import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { getPixelRatio } from '../util/canvasUtil'
+import Point from './point'
 
 const blipping = keyframes`
   from {
@@ -17,14 +18,15 @@ const blipping = keyframes`
 const StyledCanvas = styled.canvas`
   background-color: ivory;
 `
+const StyledPlane = styled.div`
+  position: relative;
+`
 
 const Canvas = () => {
   let ref = useRef();
-
   let points = useSelector((state) => Object.values(state.points));
 
   useEffect(() => {
-    let { x, y } = points[points.length - 1];
     let canvas = ref.current;
     let context = canvas.getContext("2d");
     let ratio = getPixelRatio(context);
@@ -42,26 +44,24 @@ const Canvas = () => {
     
     //background
     context.strokeRect(0, 0, canvas.width, canvas.height);
-
-    //point
-    context.arc( x, y,
-      5,
-      0,
-      2 * Math.PI
-    );
-
     context.fill();
-  }, [points]);
+  }, []);
 
   let { x, y } = points[points.length - 1];
+
+  let pointItems = points.map( (point, idx)=> <Point key={idx} point={point} />)
+
   return (
     <div>
-      <div className="plane">
-        <p>
-          Point: {x}, {y}
-        </p>
+      <p>
+        Point: {x}, {y}
+      </p>
+      <StyledPlane>
         <StyledCanvas ref={ref} style={{ width: "100px", height: "100px" }} />
-      </div>
+        <Fragment>
+          {pointItems}
+        </Fragment>
+      </StyledPlane>
     </div>
   );
 };
