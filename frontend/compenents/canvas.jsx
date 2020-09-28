@@ -1,4 +1,5 @@
 import React from 'react';
+import styled, { keyframes } from "styled-components";
 import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -14,7 +15,20 @@ const getPixelRatio = (context) => {
 
   return (window.devicePixelRatio || 1) / backingStore;
 };
-     
+
+const blinkingText = keyframes`
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+`
+
+const BlinkingCanvas = styled.canvas`
+  animation: ${blinkingText} 1.2s infinite;
+`
 
 const Canvas = () => {
   let ref = useRef();
@@ -57,7 +71,7 @@ const Canvas = () => {
         <p>
           Point: {x}, {y}
         </p>
-        <canvas ref={ref} style={{ width: "100px", height: "100px" }} />
+        <BlinkingCanvas ref={ref} style={{ width: "100px", height: "100px" }} />
       </div>
     </div>
   );

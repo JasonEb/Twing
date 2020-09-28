@@ -15,8 +15,8 @@ const Root = ({ store }) => {
     return (
     <Provider store={store}>
         <h1>{channel}</h1>
-        <MessageList />
         <Canvas />
+        <MessageList />
     </Provider>
     )
 }
