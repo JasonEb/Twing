@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { getPixelRatio } from '../util/canvasUtil'
 
-const blipping = keyframes`
+const blip = keyframes`
   from {
     opacity: 1;
   }
@@ -13,15 +13,45 @@ const blipping = keyframes`
     opacity: 0;
   }
 `
-const StyledCanvas = styled.canvas`
+const look_left = keyframes`
+  0% {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+
+  50% {
+    transform: translateX(-25px);
+    opacity:0.90;
+  }
+
+  100% {
+    transform: translateX(0px);
+    opacity:1;
+  }
+`
+
+const StyledPoint = styled.canvas`
     width: 100px;
     height: 100px;
     position: absolute;
     top: 0;
     left: 0;
-    animation: ${blipping} 1.2s 10;
+    animation: ${(props) => animationSelector(props)} 1.2s 10; 
     opacity: 0;
 `
+
+const animationSelector = (props) => { 
+  switch (props.animation) {
+    case 'blip':
+      return blip
+      break
+    case 'look_left':
+      return look_left
+      break
+    default:
+      return blip
+  }
+}
 
 const Point = ({point}) => {
     let ref = useRef();
@@ -53,7 +83,7 @@ const Point = ({point}) => {
         context.fill();
     }, [])
 
-    return (<StyledCanvas ref={ref}>Point</StyledCanvas>)
+    return (<StyledPoint ref={ref} animation={point.type}>Point</StyledPoint>)
 }
 
 export default Point;

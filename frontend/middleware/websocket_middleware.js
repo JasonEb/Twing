@@ -2,6 +2,7 @@ import {
   WS_CONNECT,
   WS_SEND,
   WS_DISCONNECT,
+  wsDisconnect,
 } from "../actions/websocket_actions";
 import { receiveMessage } from "../actions/message_actions";
 import { receivePoint } from "../actions/point_actions";
@@ -14,11 +15,20 @@ const commandDispatcher = (dispatch, parsed) => {
   if (isPointCommand) {
     let pointParams = parsed.message.split(" ")
     let [a, b] = pointParams
-    let coord = b.split(",")
-    let x = parseInt(coord[0].trim());
-    let y = parseInt(coord[1].trim());
-    parsed.message = `Point received: ${x}, ${y}`;
-    dispatch(receivePoint({ x, y }));
+    // [a, b] = [a.trim(), b.trim()]
+    a = a.trim()
+    b = b.trim()
+    
+    if ("left right up down".split(" ").includes(b)) {
+      let [x, y] = [0, 0]
+      dispatch(receivePoint({ x, y, type:`look_${b}` }))
+    } else {
+      let coord = b.split(",")
+      let x = parseInt(coord[0].trim());
+      let y = parseInt(coord[1].trim());
+      parsed.message = `Point received: ${x}, ${y}`;
+      dispatch(receivePoint({ x, y, type:"blip" }));
+    }
   }
 };
 
@@ -48,7 +58,7 @@ const websocketMiddleware = (store) => (next) => (action) => {
 
   const onClose = (store, socket) => () => {
     console.log("Disconnected from the chat server.");
-    store.dispatch(actions.wsDisconnected())
+    store.dispatch(wsDisconnect())
   };
 
   const onMessage = (store) => (event) => {
