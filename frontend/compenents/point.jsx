@@ -30,6 +30,57 @@ const look_left = keyframes`
   }
 `
 
+const look_right = keyframes`
+  0% {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+
+  50% {
+    transform: translateX(25px);
+    opacity:0.90;
+  }
+
+  100% {
+    transform: translateX(0px);
+    opacity:1;
+  }
+`
+
+const look_up = keyframes`
+  0% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+
+  50% {
+    transform: translateY(-25px);
+    opacity:0.90;
+  }
+
+  100% {
+    transform: translateY(0px);
+    opacity:1;
+  }
+`
+
+const look_down = keyframes`
+  0% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+
+  50% {
+    transform: translateY(25px);
+    opacity:0.90;
+  }
+
+  100% {
+    transform: translateY(0px);
+    opacity:1;
+  }
+`
+
 const StyledPoint = styled.canvas`
     width: 100px;
     height: 100px;
@@ -40,18 +91,22 @@ const StyledPoint = styled.canvas`
     opacity: 0;
 `
 
-const animationSelector = (props) => { 
+const animationSelector = (props) => {
   switch (props.animation) {
-    case 'blip':
-      return blip
-      break
-    case 'look_left':
-      return look_left
-      break
+    case "blip":
+      return blip;
+    case "look_left":
+      return look_left;
+    case "look_right":
+      return look_right;
+    case "look_down":
+      return look_down;
+    case "look_up":
+      return look_up;
     default:
-      return blip
+      return blip;
   }
-}
+};
 
 const Point = ({point}) => {
     let ref = useRef();
