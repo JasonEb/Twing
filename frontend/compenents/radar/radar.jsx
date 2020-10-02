@@ -2,8 +2,8 @@ import React, { Fragment } from 'react';
 import styled, { keyframes } from "styled-components";
 import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { getPixelRatio } from '../util/canvasUtil'
-import Point from './point'
+import { getPixelRatio } from '../../util/canvasUtil'
+import BlipPoint from './blipPoint'
 
 const StyledCanvas = styled.canvas`
   background-color: ivory;
@@ -11,7 +11,6 @@ const StyledCanvas = styled.canvas`
 const StyledPlane = styled.div`
   position: relative;
 `
-
 const Radar = () => {
     let ref = useRef();
     let points = useSelector((state) => Object.values(state.points).filter(
@@ -51,7 +50,7 @@ const Radar = () => {
 
     let { x, y } = points[points.length - 1];
 
-    let pointItems = points.map((point, idx) => <Point key={idx} point={point} />)
+    let pointItems = points.map((point, idx) => <BlipPoint key={idx} point={point} />)
 
     return (
         <div>

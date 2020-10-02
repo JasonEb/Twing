@@ -1,12 +1,12 @@
 import { RECEIVE_POINT } from '../actions/point_actions'
 
 const initialState = { 
-    0: { x: 25, y: 25, type: "blip" },
-    1: { x: 50, y: 50, type: "look_left" },
-    2: { x: 10, y: 10, type: "blip" },
-    3: { x: 50, y: 50, type: "look_right" },
-    4: { x: 50, y: 50, type: "look_up" },
-    5: { x: 50, y: 50, type: "look_down" },
+    0: { x: 25, y: 25, type:"blip", animation: "blip" },
+    1: { x: 10, y: 10, type:"blip", animation: "blip" },
+    2: { x: 50, y: 50, type:"eye", animation: "look_left" },
+    3: { x: 50, y: 50, type:"eye", animation: "look_right" },
+    4: { x: 50, y: 50, type:"eye", animation: "look_up" },
+    5: { x: 50, y: 50, type:"eye", animation: "look_down" },
 }
 
 const pointsReducer = (state = initialState, action) => {

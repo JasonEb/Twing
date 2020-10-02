@@ -1,13 +1,19 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { Provider } from 'react-redux';
 import MessageList from './messages/message_list'
-import Canvas from './canvas'
+import Eye from './eye/eye'
+import Radar from './radar/radar'
 import styled from 'styled-components'
 
 const StyledDiv = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+`
+
+const EyesWrapper = styled.div`
+    display: flex;
+    outline: 1px solid red;
 `
 const Root = ({ store }) => {
     const [channel, setChannel] = useState("Testing Channel")
@@ -20,8 +26,11 @@ const Root = ({ store }) => {
     <Provider store={store}>
         <StyledDiv>
             <h1>{channel}</h1>
-            <Canvas />
-            <MessageList />
+            <EyesWrapper>
+                <Eye />
+            </EyesWrapper>
+            <Radar />
+            {/* <MessageList /> */}
         </StyledDiv>
     </Provider>
     )

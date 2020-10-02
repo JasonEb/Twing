@@ -11,7 +11,7 @@ import { twitchOauth } from "../../config/keys";
 
 const commandDispatcher = (dispatch, parsed) => {
   //point command
-  let isPointCommand = parsed.message.startsWith(">point");
+  let isPointCommand = parsed.message.startsWith(">look");
   if (isPointCommand) {
     let pointParams = parsed.message.split(" ")
     let [a, b] = pointParams
@@ -20,14 +20,14 @@ const commandDispatcher = (dispatch, parsed) => {
     b = b.trim()
     
     if ("left right up down".split(" ").includes(b)) {
-      let [x, y] = [0, 0]
-      dispatch(receivePoint({ x, y, type:`look_${b}` }))
+      let [x, y] = [50, 50]
+      dispatch(receivePoint({ x, y, type:"eye", animation:`look_${b}` }))
     } else {
       let coord = b.split(",")
       let x = parseInt(coord[0].trim());
       let y = parseInt(coord[1].trim());
       parsed.message = `Point received: ${x}, ${y}`;
-      dispatch(receivePoint({ x, y, type:"blip" }));
+      dispatch(receivePoint({ x, y, animation:"blip" }));
     }
   }
 };
