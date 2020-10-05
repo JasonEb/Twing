@@ -30,7 +30,7 @@ const Root = ({ store }) => {
                 <Eye />
             </EyesWrapper>
             <Radar />
-            {/* <MessageList /> */}
+            <MessageList />
         </StyledDiv>
     </Provider>
     )

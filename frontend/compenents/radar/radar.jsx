@@ -55,7 +55,7 @@ const Radar = () => {
     return (
         <div>
             <StyledPlane>
-                <StyledCanvas ref={ref} style={{ width: "100px", height: "100px" }} />
+                <StyledCanvas ref={ref} style={{ width: "200px", height: "150px" }} />
                 <Fragment>
                     {pointItems}
                 </Fragment>

@@ -27,7 +27,7 @@ const commandDispatcher = (dispatch, parsed) => {
       let x = parseInt(coord[0].trim());
       let y = parseInt(coord[1].trim());
       parsed.message = `Point received: ${x}, ${y}`;
-      dispatch(receivePoint({ x, y, animation:"blip" }));
+      dispatch(receivePoint({ x, y, type:"blip", animation:"blip" }));
     }
   }
 };
