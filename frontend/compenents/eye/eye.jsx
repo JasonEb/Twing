@@ -41,7 +41,7 @@ const Eye = () => {
 
     // circle
     context.arc(canvas.width / 2, canvas.height / 2, 
-      47, 0, 2 * Math.PI);
+      44, 0, 2 * Math.PI);
     context.fillStyle = 'white';
     context.fill();
     context.lineWidth = 3;
