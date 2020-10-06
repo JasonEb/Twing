@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import MessageList from './messages/message_list'
 import Eye from './eye/eye'
 import Radar from './radar/radar'
+import RadarSVG from './radar/radarSvg'
 import styled from 'styled-components'
 
 const StyledDiv = styled.div`
@@ -30,6 +31,7 @@ const Root = ({ store }) => {
                 <Eye />
             </EyesWrapper>
             <Radar />
+            <RadarSVG />
             <MessageList />
         </StyledDiv>
     </Provider>
