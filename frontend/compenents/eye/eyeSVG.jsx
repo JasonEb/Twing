@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { keyframes } from "styled-components";
 import { useSelector, useDispatch } from 'react-redux'
+import EyePointSVG from './eyePointSVG'
 
 const blip = keyframes`
   from {
@@ -13,7 +14,13 @@ const blip = keyframes`
 `
 
 const StyledSVG = styled.svg`
-  fill: darkgreen;
+  fill: ivory;
+  stroke: black;
+  outline: 1px solid purple;
+`
+
+const StyledEye = styled.circle`
+  fill: white;
   stroke: black;
 `
 
@@ -22,32 +29,26 @@ const StyledPoint = styled.circle`
   stroke: black;
   strike-width: 2;
   opacity: 0;
-  animation: ${blip} 1.2s 8;
+  animation: ${blip} 1.2s 4;
 `
 
-const RadarSVG = () => {
+const eyeSVG = () => {
     let points = useSelector((state) => Object.values(state.points).filter(
-        (point) => point.type === 'blip'));
-
-    let { x, y } = points[points.length - 1];
+        (point) => point.type === 'eye'));
 
     let pointItems = points.map((point, idx) => {
-    //  <BlipPoint key={idx} point={point} />
-        let { x, y } = point
-        return <StyledPoint cx={x} cy={y} r="15">
-            <animate attributeName="r" from="10px" to="25px"
-              begin="0s" dur="10s" />
-        </StyledPoint>
+        //  <BlipPoint key={idx} point={point} />
+        return <EyePointSVG point={point} />
     })
 
     return (
-        <StyledSVG width="200" height="150" >
-            <rect width="200" height="150" />
+        <StyledSVG width="100" height="100" >
+            <StyledEye cx="50" cy="50" r="50" />
             {pointItems}
         </StyledSVG>
     );
 };
 
 
-export default RadarSVG;
+export default eyeSVG;
 
