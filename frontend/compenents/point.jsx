@@ -1,86 +1,9 @@
 import React from 'react';
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { getPixelRatio } from '../../util/canvasUtil'
-
-const blip = keyframes`
-  from {
-    opacity: 1;
-  }
-
-  to {
-    opacity: 0;
-  }
-`
-
-const look_left = keyframes`
-  0% {
-    transform: translateX(0px);
-    opacity: 1;
-  }
-
-  50% {
-    transform: translateX(-20px);
-    opacity:0.90;
-  }
-
-  100% {
-    transform: translateX(0px);
-    opacity:1;
-  }
-`
-
-const look_right = keyframes`
-  0% {
-    transform: translateX(0px);
-    opacity: 1;
-  }
-
-  50% {
-    transform: translateX(20px);
-    opacity:0.90;
-  }
-
-  100% {
-    transform: translateX(0px);
-    opacity:1;
-  }
-`
-
-const look_up = keyframes`
-  0% {
-    transform: translateY(0px);
-    opacity: 1;
-  }
-
-  50% {
-    transform: translateY(-20px);
-    opacity:0.90;
-  }
-
-  100% {
-    transform: translateY(0px);
-    opacity:1;
-  }
-`
-
-const look_down = keyframes`
-  0% {
-    transform: translateY(0px);
-    opacity: 1;
-  }
-
-  50% {
-    transform: translateY(20px);
-    opacity:0.90;
-  }
-
-  100% {
-    transform: translateY(0px);
-    opacity:1;
-  }
-`
+import { getPixelRatio } from '../util/canvasUtil'
+import * as animations from '../animations'
 
 const StyledPoint = styled.canvas`
     width: 100px;
@@ -88,12 +11,14 @@ const StyledPoint = styled.canvas`
     position: absolute;
     top: 0;
     left: 0;
-    animation: ${(props) => animationSelector(props)} 1.2s 4; 
+    animation: ${(props) => animationSelector(props)} 1.2s 10; 
     opacity: 0;
 `
 
 const animationSelector = (props) => {
   switch (props.animation) {
+    case "blip":
+      return blip;
     case "look_left":
       return look_left;
     case "look_right":
@@ -107,7 +32,7 @@ const animationSelector = (props) => {
   }
 };
 
-const EyePoint = ({point}) => {
+const Point = ({point}) => {
     let ref = useRef();
 
     useEffect(() => {
@@ -129,7 +54,7 @@ const EyePoint = ({point}) => {
 
         //point
         context.arc(x, y,
-            20,
+            5,
             0,
             2 * Math.PI
         );
@@ -137,7 +62,7 @@ const EyePoint = ({point}) => {
         context.fill();
     }, [])
 
-    return (<StyledPoint ref={ref} animation={point.animation}>Point</StyledPoint>)
+    return (<StyledPoint ref={ref} animation={point.type}>Point</StyledPoint>)
 }
 
-export default EyePoint;
+export default Point;
