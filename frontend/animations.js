@@ -76,3 +76,18 @@ export const look_down = keyframes`
     opacity:1;
   }
 `
+
+export const animationSelector = (props) => {
+  switch (props.animation) {
+    case "look_left":
+      return look_left;
+    case "look_right":
+      return look_right;
+    case "look_down":
+      return look_down;
+    case "look_up":
+      return look_up;
+    default:
+      return blip;
+  }
+};

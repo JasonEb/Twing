@@ -30,7 +30,6 @@ const animationSelector = (props) => {
     default:
       return blip;
   }
-};
 
 const Point = ({point}) => {
     let ref = useRef();

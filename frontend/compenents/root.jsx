@@ -2,9 +2,7 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { Provider } from 'react-redux';
 import MessageList from './messages/message_list'
 import Eye from './eye/eye'
-import EyeSVG from './eye/eyeSVG'
 import Radar from './radar/radar'
-import RadarSVG from './radar/radarSvg'
 import styled from 'styled-components'
 
 const StyledDiv = styled.div`
@@ -30,10 +28,8 @@ const Root = ({ store }) => {
             <h1>{channel}</h1>
             <EyesWrapper>
                 <Eye />
-                <EyeSVG />
             </EyesWrapper>
             <Radar />
-            <RadarSVG />
             <MessageList />
         </StyledDiv>
     </Provider>
